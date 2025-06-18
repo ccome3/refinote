@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>작성한 노트 상세 | Refinote</title>
+
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/merged-styles.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+    <style>
+        .pdf-page {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            min-height: 1122px;
+            padding: 20px;
+            margin: 20px auto;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        @media print {
+            .pdf-page {
+                width: 210mm;
+                min-height: 297mm;
+                padding: 20mm;
+                box-shadow: none;
+                border: none;
+                page-break-after: always;
+            }
+        }
+
+        .pdf-page img {
+            max-width: 100%;
+            display: block;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-preview {
+                order: 3 !important;
+            }
+        }
+
+        .journal-info {
+            height: 400px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .journal-info img {
+            max-height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header" class="fixed-top ">
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="index.html#menu">Quick-Menu</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#about">소개</a></li>
+                    <li class="dropdown"><a href="Research.html"><span>레퍼런스</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="Research.html">전체</a></li>
+                            <li><a href="Research.html?category=photo">사진</a></li>
+                            <li><a href="Research.html?category=illustration">일러스트</a></li>
+                            <li><a href="Research.html?category=ai">AI</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#"><span>새로운 아이디어</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="upload.html">레퍼런스 업로드</a></li>
+                            <li><a href="note.html">노트 작성</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="Storage.html?category=reference"><span>저장소</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="Storage.html?category=reference">저장한 레퍼런스</a></li>
+                            <li><a href="Storage.html?category=note">작성한 노트</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link scrollto" href="Notice.html">저작권 안내</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#contact">문의</a></li>
+                    <li><a class="nav-link scrollto active" href="Log-in.html">로그인</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+
+        </div>
+    </header>
+
+    <main id="main" class="mt-5 pt-5">
+        <section class="container mt-5">
+            <div class="row d-flex flex-md-row flex-column">
+                <div class="col-md-4 mb-4 order-md-0 mobile-preview">
+                    <h2 style="font-size: 2rem; font-weight: bold; text-align: center; margin-bottom: 20px;">작성한 노트</h2>
+
+                    <div class="portfolio-item filter-note">
+                        <div class="journal-info mb-30">
+                            <a href="Storage_details02.html">
+                                <img src="assets/img/portfolio/portfolio-2.jpg" class="img-responsive" alt="노트 이미지" />
+                            </a>
+
+                            <div class="journal-txt text-center">
+                                <h4><a href="Storage_details02.html">노트</a></h4>
+                                <p class="separator">노트</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 order-md-1 d-flex flex-column">
+
+                    <div class="text-center mb-4">
+                        <button class="btn btn-primary" id="downloadBtn"><i class="bi bi-download"></i> PDF 다운로드</button>
+                        <a href="note.html" class="btn btn-secondary" id="editBtn">
+                            <i class="bi bi-pencil"></i> 수정하기
+                        </a>
+                    </div>
+
+                    <div class="section-title text-center">
+                        <h2 id="noteTitle">아이디어 노트 01</h2>
+                    </div>
+
+                    <div id="pages">
+                        <div class="pdf-page">
+                            <h3>아이디어 1</h3>
+                            <p>1. Focal length<br>
+                                - 렌즈 초점 거리, 렌즈의 중심과 이미지 센서 사이의 거리<br>
+                                - 짧은 초점 거리: 시야각이 넓음(광각)<br>
+                                - 긴 초점 거리: 시야각이 좁음(망원)<br>
+                                2. Close-up Image
+                                - macro ring을 사용 -> 최소 초점 거리를 줄여 접사에 알맞도록 조절 가능<br></p>
+                            <img src="assets/img/portfolio/portfolio-2.jpg" alt="Example Image">
+                        </div>
+
+                        <div class="pdf-page">
+                            <h3>아이디어 2</h3>
+                            <p>1. Three-Point Portrait Lighting(3점 조명)<br>
+                                - Key Light: 메인 광원, 가장 밝게 보일 부분을 비춤<br>
+                                - Fill Light: Key Light로 인해 생기는 그림자의 밝기를 조절<br>
+                                - Back Light: 머릿결 등을 더욱 잘 드러나게 함, 배경과 인물을 분리<br></p>
+                            <img src="assets/img/portfolio/portfolio-3.jpg" alt="Character Concept">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer" class="text-center">
+        <div class="container">
+            <div class="socials-media text-center">
+                <ul class="list-unstyled">
+                    <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+                    <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+                    <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+                    <li><a href="#"><i class="bi bi-linkedin"></i></a></li>
+                </ul>
+            </div>
+
+            <p>&copy; Copyrights Folio. All rights reserved.</p>
+
+            <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const noteTitleElement = document.getElementById('noteTitle');
+        const pagesElement = document.getElementById('pages');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const editBtn = document.getElementById('editBtn');
+
+        downloadBtn.addEventListener('click', () => {
+            const element = pagesElement.cloneNode(true);
+
+            html2pdf().set({
+                margin: 0,
+                filename: `${noteTitleElement.textContent || '노트'}.pdf`,
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            }).from(element).save();
+        });
+
+        editBtn.addEventListener('click', () => {
+            window.location.href = 'edit.html';
+        });
+    </script>
+
+</body>
+
+</html>

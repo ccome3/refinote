@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>레퍼런스 업로드 | Refinote</title>
+
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/css/merged-styles.css" rel="stylesheet">
+
+    <style>
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 50px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            min-height: 300px;
+            position: relative;
+        }
+
+        .upload-area.dragover {
+            background-color: #f8f9fa;
+        }
+
+        #preview img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        #preview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        #upload-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #888;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="index.html#menu">Quick-Menu</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#about">소개</a></li>
+                    <li class="dropdown"><a href="Research.html"><span>레퍼런스</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="Research.html">전체</a></li>
+                            <li><a href="Research.html?category=photo">사진</a></li>
+                            <li><a href="Research.html?category=illustration">일러스트</a></li>
+                            <li><a href="Research.html?category=ai">AI</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#"><span>새로운 아이디어</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="upload.html">레퍼런스 업로드</a></li>
+                            <li><a href="note.html">노트 작성</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="Storage.html?category=reference"><span>저장소</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="Storage.html?category=reference">저장한 레퍼런스</a></li>
+                            <li><a href="Storage.html?category=note">작성한 노트</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link scrollto" href="Notice.html">저작권 안내</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#contact">문의</a></li>
+                    <li><a class="nav-link scrollto active" href="Log-in.html">로그인</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+
+        </div>
+    </header>
+
+    <main id="main" class="mt-5 pt-5">
+
+        <section class="container mt-5">
+            <div class="section-title">
+                <h2>레퍼런스 업로드</h2>
+                <p>당신의 레퍼런스를 공유하세요.</p>
+            </div>
+
+            <div class="upload-area" id="upload-area">
+                <div id="preview"></div>
+                <p id="upload-text">+ 드래그 앤 드랍 or 클릭하여 업로드</p>
+                <input type="file" id="fileInput" hidden multiple accept="image/*">
+            </div>
+
+            <div id="preview" class="row mt-4"></div>
+
+            <form class="mt-4">
+                <div class="mb-3">
+                    <label for="category" class="form-label">카테고리</label>
+                    <select class="form-select" id="category">
+                        <option selected disabled>카테고리를 선택하세요.</option>
+                        <option value="design">사진</option>
+                        <option value="development">일러스트</option>
+                        <option value="research">AI</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="title" class="form-label">제목</label>
+                    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">설명</label>
+                    <textarea class="form-control" id="description" rows="4" placeholder="설명을 입력하세요."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">업로드</button>
+            </form>
+
+        </section>
+
+    </main>
+    <br>
+
+    <footer id="footer" class="text-center">
+        <div class="container">
+            <div class="socials-media text-center">
+                <ul class="list-unstyled">
+                    <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+                    <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+                    <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+                    <li><a href="#"><i class="bi bi-linkedin"></i></a></li>
+                </ul>
+            </div>
+
+            <p>&copy; Copyrights Folio. All rights reserved.</p>
+
+            <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/typed.js/typed.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        const uploadArea = document.getElementById('upload-area');
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('preview');
+        const uploadText = document.getElementById('upload-text');
+
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                handleFile(fileInput.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.innerHTML = '';
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = file.name;
+                    img.style.maxWidth = '100%';
+                    img.style.cursor = 'pointer';
+
+                    preview.appendChild(img);
+                    uploadText.style.display = 'none';
+
+                    img.addEventListener('click', () => {
+                        preview.innerHTML = '';
+                        fileInput.value = '';
+                        uploadText.style.display = 'block';
+                    });
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

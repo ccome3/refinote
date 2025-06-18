@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>내 저장소 | Refinote</title>
+
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i|Playfair+Display:400,400i,500,500i,600,600i,700,700i,900,900i"
+        rel="stylesheet" />
+
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <link href="assets/css/merged-styles.css" rel="stylesheet" />
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .reference-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #8e35ef;
+            text-align: center;
+            margin-top: 120px;
+            margin-bottom: 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .search-bar input {
+            width: 60%;
+            padding: 12px 20px;
+            border: 1.5px solid #dee2e6;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color: #8e35ef;
+            box-shadow: 0 0 5px rgba(29, 128, 159, 0.4);
+        }
+
+        #portfolio-flters li {
+            display: inline-block;
+            margin: 0 15px;
+            cursor: pointer;
+            color: #8e35ef;
+            font-weight: 500;
+            list-style: none;
+        }
+
+        #portfolio-flters li.filter-active {
+            text-decoration: none;
+        }
+
+        .journal-info {
+            height: 400px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .journal-info img {
+            max-height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header id="header" class="fixed-top ">
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="index.html#menu">Quick-Menu</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#about">소개</a></li>
+                    <li class="dropdown"><a href="Research.html"><span>레퍼런스</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="Research.html">전체</a></li>
+                            <li><a href="Research.html?category=photo">사진</a></li>
+                            <li><a href="Research.html?category=illustration">일러스트</a></li>
+                            <li><a href="Research.html?category=ai">AI</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#"><span>새로운 아이디어</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="upload.html">레퍼런스 업로드</a></li>
+                            <li><a href="note.html">노트 작성</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="Storage.html"><span>저장소</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="Storage.html">저장한 레퍼런스</a></li>
+                            <li><a href="Storage.html?category=note">작성한 노트</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link scrollto" href="Notice.html">저작권 안내</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#contact">문의</a></li>
+                    <li><a class="nav-link scrollto active" href="Log-in.html">로그인</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+
+        </div>
+    </header>
+
+    <div id="portfolio" class="paddsection">
+        <div class="container">
+            <h2 class="reference-title" id="randomTitle">내 저장소</h2>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="검색어를 입력하세요" />
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <ul id="portfolio-flters">
+                        <li data-filter=".filter-reference" class="filter-active">레퍼런스</li>
+                        <li data-filter=".filter-note">노트</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row portfolio-container">
+
+                <div class="col-lg-3 col-md-4 portfolio-item filter-reference">
+                    <a href="Storage_details01.html">
+                        <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="" />
+                        <div class="portfolio-info">
+                            <h4>멋진 사진</h4>
+                            <p>사진</p>
+
+                            <a href="#!" class="bookmark-link" title="북마크"><i class="bx bxs-star"></i></a>
+
+                            <a href="assets/img/portfolio/portfolio-1.jpg" download class="download-link" title="다운로드"><i
+                                    class="bx bx-download"></i></a>
+
+                            <a href="note.html" class="details-link" title="노트로 가져가기"><i class="bx bx-pencil"></i></a>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-lg-3 col-md-4 portfolio-item filter-reference">
+                    <a href="Storage_details01.html">
+                        <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="" />
+                        <div class="portfolio-info">
+                            <h4>멋진 일러스트</h4>
+                            <p>일러스트</p>
+
+                            <a href="#!" class="bookmark-link" title="북마크"><i class="bx bxs-star"></i></a>
+
+                            <a href="assets/img/portfolio/portfolio-2.jpg" download class="download-link" title="다운로드"><i
+                                    class="bx bx-download"></i></a>
+
+                            <a href="note.html" class="details-link" title="노트로 가져가기"><i class="bx bx-pencil"></i></a>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-lg-3 col-md-4 portfolio-item filter-reference">
+                    <a href="Storage_details01.html">
+                        <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="" />
+                        <div class="portfolio-info">
+                            <h4>AI 창작물</h4>
+                            <p>AI</p>
+
+                            <a href="#!" class="bookmark-link" title="북마크"><i class="bx bxs-star"></i></a>
+
+                            <a href="assets/img/portfolio/portfolio-3.jpg" download class="download-link" title="다운로드"><i
+                                    class="bx bx-download"></i></a>
+
+                            <a href="note.html" class="details-link" title="노트로 가져가기"><i class="bx bx-pencil"></i></a>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-note">
+                    <div class="journal-info mb-30">
+                        <a href="Storage_details02.html">
+                            <img src="assets/img/portfolio/portfolio-2.jpg" class="img-responsive" alt="노트 이미지" />
+                        </a>
+
+                        <div class="journal-txt">
+                            <h4><a href="Storage_details02.html">노트</a></h4>
+                            <p class="separator">노트</p>
+
+                            <div class="journal-links">
+                                <a href="note.html" class="details-link" title="노트 수정하기"><i class="bx bx-pencil"></i></a>
+                                <a href="#!" class="delete-link" title="삭제하기"
+                                    onclick="if(confirm('정말 삭제하시겠습니까?')) { this.closest('.portfolio-item').remove(); }"><i
+                                        class="bx bx-trash"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="footer" class="text-center">
+        <div class="container">
+            <div class="socials-media text-center">
+
+                <ul class="list-unstyled">
+                    <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+                    <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+                    <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+                    <li><a href="#"><i class="bi bi-linkedin"></i></a></li>
+                </ul>
+
+            </div>
+
+            <p>&copy; Copyrights Folio. All rights reserved.</p>
+
+            <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/typed.js/typed.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <script src="assets/js/main.js"></script>
+
+<script>
+    window.addEventListener('load', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category');
+
+        const portfolioContainer = document.querySelector('.portfolio-container');
+        const filters = document.querySelectorAll('#portfolio-flters li');
+
+        if (portfolioContainer) {
+            const initialFilter = category === 'note' ? '.filter-note' : '.filter-reference';
+
+            const portfolioIsotope = new Isotope(portfolioContainer, {
+                itemSelector: '.portfolio-item',
+                layoutMode: 'fitRows',
+                filter: initialFilter
+            });
+
+            filters.forEach(filter => {
+                const filterValue = filter.getAttribute('data-filter');
+                if (filterValue === initialFilter) {
+                    filter.classList.add('filter-active');
+                } else {
+                    filter.classList.remove('filter-active');
+                }
+
+                filter.addEventListener('click', function () {
+                    filters.forEach(el => el.classList.remove('filter-active'));
+                    this.classList.add('filter-active');
+
+                    const clickedFilter = this.getAttribute('data-filter');
+                    portfolioIsotope.arrange({ filter: clickedFilter });
+
+                    document.getElementById('searchInput').value = '';
+                });
+            });
+
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function () {
+                const filterText = this.value.toLowerCase();
+                const activeFilter = document.querySelector('#portfolio-flters li.filter-active');
+                const filterValue = activeFilter ? activeFilter.getAttribute('data-filter') : '*';
+
+                portfolioIsotope.arrange({
+                    filter: function (itemElem) {
+                        const matchesCategory = filterValue === '*' || itemElem.classList.contains(filterValue.slice(1));
+                        const text = itemElem.textContent.toLowerCase();
+                        const matchesSearch = text.indexOf(filterText) > -1;
+                        return matchesCategory && matchesSearch;
+                    }
+                });
+            });
+        }
+    });
+</script>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.bookmark-link').forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('bxs-star')) {
+                    icon.classList.remove('bxs-star');
+                    icon.classList.add('bx-star');
+                } else {
+                    icon.classList.remove('bx-star');
+                    icon.classList.add('bxs-star');
+                }
+            });
+        });
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>노트 작성 | Refinote</title>
+
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="assets/css/merged-styles.css" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+    <style>
+        .note-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .pdf-page {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            min-height: 1122px;
+            padding: 20px;
+            margin: 20px auto;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .pdf-page + .pdf-page {
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .pdf-page {
+                padding: 15px;
+                font-size: 13px;
+            }
+        }
+
+        @media print {
+            .pdf-page {
+                width: 210mm;
+                min-height: 297mm;
+                padding: 20mm;
+                box-shadow: none;
+                border: none;
+                page-break-after: always;
+            }
+        }
+
+        .editable-area {
+            min-height: 1000px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-y: auto;
+        }
+
+        .editable-area img {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+            object-fit: contain;
+        }
+
+        .reference-gallery {
+            max-height: 500px;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+        }
+
+        .reference-gallery img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-bottom: 10px;
+        }
+
+        .reference-gallery img:hover {
+            transform: scale(1.02);
+        }
+
+        .delete-page-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="Logo" class="img-fluid" /></a>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="index.html#menu">Quick-Menu</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#about">소개</a></li>
+                    <li class="dropdown">
+                        <a href="Research.html"><span>레퍼런스</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="Research.html">전체</a></li>
+                            <li><a href="Research.html?category=photo">사진</a></li>
+                            <li><a href="Research.html?category=illustration">일러스트</a></li>
+                            <li><a href="Research.html?category=ai">AI</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#"><span>새로운 아이디어</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="upload.html">레퍼런스 업로드</a></li>
+                            <li><a href="note.html">노트 작성</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="Storage.html?category=reference"><span>저장소</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="Storage.html?category=reference">저장한 레퍼런스</a></li>
+                            <li><a href="Storage.html?category=note">작성한 노트</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link scrollto" href="Notice.html">저작권 안내</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#contact">문의</a></li>
+                    <li><a class="nav-link scrollto active" href="Log-in.html">로그인</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main" class="mt-5 pt-5">
+        <section class="container mt-5">
+            <div class="section-title">
+                <h2>노트 작성</h2>
+                <p>당신의 아이디어를 정리하세요.</p>
+            </div>
+
+            <div class="container-fluid mt-5 pt-5">
+                <div class="row">
+                    <div class="col-md-8 mb-4">
+                        <div class="note-container">
+                            <input type="text" id="noteTitle" class="form-control mb-3" placeholder="제목을 입력하세요" />
+
+                            <div class="mb-3">
+                                <label for="imageUpload" class="form-label">이미지 업로드</label>
+                                <input class="form-control" type="file" id="imageUpload" accept="image/*" />
+                            </div>
+
+                            <div id="pages"></div>
+
+                            <div class="btn-group d-flex justify-content-between mt-3">
+                                <button class="btn btn-secondary" id="addPageBtn"><i class="bi bi-plus-circle"></i> 페이지 추가</button>
+                                <div>
+                                    <button class="btn btn-success me-2" id="saveBtn"><i class="bi bi-save"></i> 저장</button>
+                                    <button class="btn btn-primary" id="downloadBtn"><i class="bi bi-download"></i> PDF 다운로드</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="note-container">
+                            <h5 class="mb-3">레퍼런스 저장소</h5>
+                            <div class="reference-gallery" id="referenceGallery">
+                                <img src="assets/img/portfolio/portfolio-1.jpg" alt="Reference 1" />
+                                <img src="assets/img/portfolio/portfolio-2.jpg" alt="Reference 2" />
+                                <img src="assets/img/portfolio/portfolio-3.jpg" alt="Reference 3" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer" class="text-center">
+        <div class="container">
+            <div class="socials-media text-center">
+                <ul class="list-unstyled">
+                    <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+                    <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+                    <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+                    <li><a href="#"><i class="bi bi-linkedin"></i></a></li>
+                </ul>
+            </div>
+
+            <p>&copy; Copyrights Folio. All rights reserved.</p>
+
+            <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/typed.js/typed.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/js/main.js"></script>
+
+
+    <script>
+        const saveBtn = document.getElementById('saveBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const addPageBtn = document.getElementById('addPageBtn');
+        const noteTitle = document.getElementById('noteTitle');
+        const imageUpload = document.getElementById('imageUpload');
+        const referenceGallery = document.getElementById('referenceGallery');
+        const pages = document.getElementById('pages');
+
+        function createPage(content = '여기에 내용을 작성하세요.') {
+            const newPage = document.createElement('div');
+            newPage.className = 'pdf-page editable-area';
+            newPage.contentEditable = 'true';
+            newPage.innerHTML = content;
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-page-btn';
+            deleteBtn.innerHTML = '×';
+            deleteBtn.addEventListener('click', () => {
+                if (pages.children.length > 1) {
+                    newPage.remove();
+                } else {
+                    alert('최소 1페이지는 남아있어야 합니다.');
+                }
+            });
+
+            newPage.appendChild(deleteBtn);
+            pages.appendChild(newPage);
+        }
+
+        window.addEventListener('load', () => {
+            const savedTitle = localStorage.getItem('noteTitle');
+            const savedPages = JSON.parse(localStorage.getItem('notePages'));
+
+            if (savedTitle) noteTitle.value = savedTitle;
+
+            if (savedPages && savedPages.length > 0) {
+                pages.innerHTML = '';
+                savedPages.forEach(content => {
+                    createPage(content);
+                });
+            } else {
+                createPage();
+            }
+        });
+
+        saveBtn.addEventListener('click', () => {
+            const title = noteTitle.value.trim();
+            const pageContents = Array.from(document.querySelectorAll('.pdf-page')).map(page => {
+                const clone = page.cloneNode(true);
+                const deleteBtn = clone.querySelector('.delete-page-btn');
+                if (deleteBtn) deleteBtn.remove();
+                return clone.innerHTML;
+            });
+
+            if (!title && pageContents.every(content => !content.trim())) {
+                alert('내용을 입력해주세요.');
+                return;
+            }
+
+            localStorage.setItem('noteTitle', title);
+            localStorage.setItem('notePages', JSON.stringify(pageContents));
+
+            alert('노트가 저장되었습니다!');
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            const element = pages.cloneNode(true);
+
+            element.querySelectorAll('.delete-page-btn').forEach(btn => btn.remove());
+
+            html2pdf()
+                .set({
+                    margin: 0,
+                    filename: `${noteTitle.value || '노트'}.pdf`,
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                })
+                .from(element)
+                .save();
+        });
+
+        imageUpload.addEventListener('change', e => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const img = document.createElement('img');
+                    img.src = event.target.result;
+
+                    const lastPage = pages.lastElementChild;
+                    lastPage.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        referenceGallery.addEventListener('click', e => {
+            if (e.target.tagName === 'IMG') {
+                const img = document.createElement('img');
+                img.src = e.target.src;
+
+                // 이미지 클릭 시 노트의 마지막 페이지에 추가
+                const lastPage = pages.lastElementChild;
+                lastPage.appendChild(img);
+            }
+        });
+
+        addPageBtn.addEventListener('click', () => {
+            createPage();
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        });
+    </script>
+</body>
+
+</html>
